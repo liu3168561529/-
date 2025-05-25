@@ -1,97 +1,330 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的导航页</title>
+  <title>✨ 我的导航页</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to right, #e0f7fa, #80deea);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('img/bg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #000;
+      transition: background 0.3s, color 0.3s;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.75);
+      z-index: -1;
+    }
+    body.dark {
+      color: #eee;
+    }
+    body.dark::before {
+      background: rgba(0,0,0,0.6);
     }
 
     .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 20px;
+      width: 90%;
+      max-width: 900px;
+      background: #fff;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+      transition: background 0.3s;
+    }
+    body.dark .container {
+      background: #1e1e1e;
+    }
+
+    .title {
       text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 20px;
     }
 
-    h1 {
-      font-size: 32px;
-      margin-bottom: 30px;
-      color: #00796b;
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
     }
 
-    .grid {
+    .toolbar input, .toolbar select {
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid hsl(172, 95%, 36%);
+    }
+
+    .card-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
     }
 
     .card {
-      background: white;
+      background: #fefefe;
+      border: 1px solid #ccc;
       border-radius: 12px;
-      padding: 20px;
+      padding: 16px;
       text-align: center;
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+      position: relative;
     }
-
+    .dark .card {
+      background: #292929;
+    }
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+      transform: scale(1.03);
     }
 
+    .card a {
+      text-decoration: none;
+      color: hsl(172, 95%, 36%);
+      font-weight: bold;
+    }
     .card img {
       width: 32px;
       height: 32px;
-      margin-bottom: 10px;
-    }
-
-    .card span {
       display: block;
-      font-size: 16px;
-      color: #333;
+      margin: 0 auto 10px;
     }
 
-    footer {
-      margin-top: 40px;
+    .form {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .form input, .form select {
+      padding: 10px;
       font-size: 14px;
-      color: #555;
+      margin: 5px;
+      border-radius: 8px;
+      border: 1px solid hsl(172, 95%, 36%);
+    }
+
+    .form button, .toolbar button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background-color: hsl(172, 95%, 36%);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .form button:hover, .toolbar button:hover {
+      background-color: hsl(172, 95%, 30%);
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+    }
+
+    .category {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .actions {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+    .actions button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+body {
+  background-image: url('E:/GLG纪念/千恋＊万花_20250204_210120.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+
+    @media (max-width: 500px) {
+      .toolbar {
+        flex-direction: column;
+        align-items: center;
+      }
+      .theme-toggle {
+        position: static;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>📌 我的常用导航</h1>
-    <div class="grid">
-      <a class="card" href="https://www.baidu.com" target="_blank">
-        <img src="https://www.baidu.com/favicon.ico" alt="Baidu" />
-        <span>百度</span>
-      </a>
-      <a class="card" href="https://www.zhihu.com" target="_blank">
-        <img src="https://www.zhihu.com/favicon.ico" alt="Zhihu" />
-        <span>知乎</span>
-      </a>
-      <a class="card" href="https://www.bilibili.com" target="_blank">
-        <img src="https://www.bilibili.com/favicon.ico" alt="Bilibili" />
-        <span>B站</span>
-      </a>
-      <a class="card" href="https://github.com" target="_blank">
-        <img src="https://github.com/favicon.ico" alt="GitHub" />
-        <span>GitHub</span>
-      </a>
-      <a class="card" href="https://developer.mozilla.org/zh-CN/" target="_blank">
-        <img src="https://developer.mozilla.org/favicon.ico" alt="MDN" />
-        <span>MDN</span>
-      </a>
+    <div class="title">🚀 我的导航页</div>
+
+    <div class="toolbar">
+      <input id="search" placeholder="搜索网站...">
+      <select id="category">
+        <option value="all">全部分类</option>
+        <option value="学习">学习</option>
+        <option value="娱乐">娱乐</option>
+      </select>
+      <button id="toggleTheme">切换主题</button>
+      <button id="exportBtn">导出</button>
+      <input type="file" id="importFile" style="display:none;">
+      <button id="importBtn">导入</button>
     </div>
 
-    <footer>© 2025 我的导航页</footer>
+    <div class="card-grid" id="cardGrid"></div>
+
+    <div class="form">
+      <h3>➕ 添加新网站</h3>
+      <input id="siteName" placeholder="网站名称">
+      <input id="siteURL" placeholder="https://">
+      <select id="siteCat">
+        <option value="学习">学习</option>
+        <option value="娱乐">娱乐</option>
+      </select>
+      <button id="addSite">添加</button>
+    </div>
   </div>
+
+  <script>
+    let data = JSON.parse(localStorage.getItem('siteData')) || [
+      { name: '百度', url: 'https://www.baidu.com', category: '学习' },
+      { name: '哔哩哔哩', url: 'https://www.bilibili.com', category: '娱乐' },
+      { name: '知乎', url: 'https://www.zhihu.com', category: '学习' }
+    ];
+
+    const searchInput = document.getElementById('search');
+    const categorySelect = document.getElementById('category');
+    const cardGrid = document.getElementById('cardGrid');
+
+    function render() {
+      const keyword = searchInput.value.toLowerCase();
+      const category = categorySelect.value;
+
+      cardGrid.innerHTML = '';
+      data
+        .filter(site => {
+          const matchesKeyword = site.name.toLowerCase().includes(keyword);
+          const matchesCategory = category === 'all' || site.category === category;
+          return matchesKeyword && matchesCategory;
+        })
+        .forEach((site, index) => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <img src="https://www.google.com/s2/favicons?domain=${site.url}&sz=64" alt="icon">
+            <a href="${site.url}" target="_blank">${site.name}</a>
+            <div class="category">${site.category}</div>
+            <div class="actions">
+              <button onclick="editSite(${index})">✏️</button>
+              <button onclick="deleteSite(${index})">❌</button>
+            </div>
+          `;
+          cardGrid.appendChild(card);
+        });
+    }
+
+    document.getElementById('addSite').addEventListener('click', () => {
+      const name = document.getElementById('siteName').value.trim();
+      const url = document.getElementById('siteURL').value.trim();
+      const category = document.getElementById('siteCat').value;
+
+      if (!name || !url.startsWith('http')) {
+        alert('请输入正确的网址和名称');
+        return;
+      }
+
+      if (data.some(site => site.url === url)) {
+        alert('该网站已存在');
+        return;
+      }
+
+      data.push({ name, url, category });
+      localStorage.setItem('siteData', JSON.stringify(data));
+      document.getElementById('siteName').value = '';
+      document.getElementById('siteURL').value = '';
+      render();
+    });
+
+    function deleteSite(index) {
+      if (confirm('确定删除该网站吗？')) {
+        data.splice(index, 1);
+        localStorage.setItem('siteData', JSON.stringify(data));
+        render();
+      }
+    }
+
+    function editSite(index) {
+      const site = data[index];
+      const name = prompt('修改名称：', site.name);
+      const url = prompt('修改网址：', site.url);
+      if (name && url.startsWith('http')) {
+        data[index] = { ...site, name, url };
+        localStorage.setItem('siteData', JSON.stringify(data));
+        render();
+      } else {
+        alert('修改失败，名称不能为空且网址需以 http 开头');
+      }
+    }
+
+    document.getElementById('toggleTheme').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'siteData.json';
+      a.click();
+    });
+
+    document.getElementById('importBtn').addEventListener('click', () => {
+      document.getElementById('importFile').click();
+    });
+
+    document.getElementById('importFile').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          try {
+            const importedData = JSON.parse(evt.target.result);
+            if (Array.isArray(importedData)) {
+              data = importedData;
+              localStorage.setItem('siteData', JSON.stringify(data));
+              render();
+            } else {
+              alert('导入数据格式错误');
+            }
+          } catch {
+            alert('读取失败');
+          }
+        };
+        reader.readAsText(file);
+      }
+    });
+
+    searchInput.addEventListener('input', render);
+    categorySelect.addEventListener('change', render);
+
+    render();
+  </script>
 </body>
 </html>
